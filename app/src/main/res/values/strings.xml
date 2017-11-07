@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AllCountries</string>
+    <string name="country_name">Name</string>
+    <string name="country_code">Code</string>
+</resources>
