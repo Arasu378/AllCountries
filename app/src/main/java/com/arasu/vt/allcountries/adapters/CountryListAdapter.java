@@ -1,11 +1,15 @@
 package com.arasu.vt.allcountries.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.arasu.vt.allcountries.CountryDetailActivity;
 import com.arasu.vt.allcountries.R;
 import com.arasu.vt.allcountries.databinding.AdapterListItemBinding;
 import com.arasu.vt.allcountries.databinding.InfiniteLoaderBinding;
@@ -13,6 +17,8 @@ import com.arasu.vt.allcountries.models.RootObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import retrofit2.http.PUT;
 
@@ -87,6 +93,15 @@ public CountryListAdapter(List<RootObject>countryList){
             switch (getItemViewType(position)){
                 case LIST_ITEM:
                     holder.bindTo(countryList.get(position));
+                   holder.itemView.setOnClickListener(v->{
+                       Context context=holder.itemView.getContext();
+                       Bundle bundle=new Bundle();
+                       Intent intent=new Intent(context, CountryDetailActivity.class);
+                       RootObject object=countryList.get(position);
+                       bundle.putParcelable("value",object);
+                       intent.putExtras(bundle);
+                       context.startActivity(intent);
+                   });
                     break;
                 case LOAD_MORE:
                     break;

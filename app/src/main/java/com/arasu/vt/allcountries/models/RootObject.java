@@ -1,5 +1,8 @@
 package com.arasu.vt.allcountries.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,10 +12,54 @@ import java.util.ArrayList;
  * Created by kyros on 07-11-2017.
  */
 
-public class RootObject{
+public class RootObject implements Parcelable {
     @SerializedName("name")
     @Expose
     private String name;
+    public RootObject(){
+
+    }
+    protected RootObject(Parcel in) {
+        name = in.readString();
+        topLevelDomain = in.createStringArrayList();
+        alpha2Code = in.readString();
+        alpha3Code = in.readString();
+        callingCodes = in.createStringArrayList();
+        capital = in.readString();
+        altSpellings = in.createStringArrayList();
+        region = in.readString();
+        subregion = in.readString();
+        population = in.readInt();
+        demonym = in.readString();
+        if (in.readByte() == 0) {
+            area = null;
+        } else {
+            area = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            gini = null;
+        } else {
+            gini = in.readDouble();
+        }
+        timezones = in.createStringArrayList();
+        borders = in.createStringArrayList();
+        nativeName = in.readString();
+        numericCode = in.readString();
+        flag = in.readString();
+        cioc = in.readString();
+    }
+
+    public static final Creator<RootObject> CREATOR = new Creator<RootObject>() {
+        @Override
+        public RootObject createFromParcel(Parcel in) {
+            return new RootObject(in);
+        }
+
+        @Override
+        public RootObject[] newArray(int size) {
+            return new RootObject[size];
+        }
+    };
 
     public String getName() { return this.name; }
 
@@ -178,4 +225,42 @@ public class RootObject{
     public String getCioc() { return this.cioc; }
 
     public void setCioc(String cioc) { this.cioc = cioc; }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeStringList(topLevelDomain);
+        parcel.writeString(alpha2Code);
+        parcel.writeString(alpha3Code);
+        parcel.writeStringList(callingCodes);
+        parcel.writeString(capital);
+        parcel.writeStringList(altSpellings);
+        parcel.writeString(region);
+        parcel.writeString(subregion);
+        parcel.writeInt(population);
+        parcel.writeString(demonym);
+        if (area == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(area);
+        }
+        if (gini == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(gini);
+        }
+        parcel.writeStringList(timezones);
+        parcel.writeStringList(borders);
+        parcel.writeString(nativeName);
+        parcel.writeString(numericCode);
+        parcel.writeString(flag);
+        parcel.writeString(cioc);
+    }
 }

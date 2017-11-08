@@ -1,5 +1,6 @@
 package com.arasu.vt.allcountries.dependencyinjection;
 
+import com.arasu.vt.allcountries.CountryDetailActivity;
 import com.arasu.vt.allcountries.MainActivity;
 import com.arasu.vt.allcountries.dependencyinjection.modules.RetrofitClient;
 
@@ -14,4 +15,5 @@ import dagger.Component;
 @Component(modules = {RetrofitClient.class})
 public interface ApplicationComponent {
     void inject(MainActivity mainActivity);
+   // void injectAc(CountryDetailActivity countryDetailActivity);
 }

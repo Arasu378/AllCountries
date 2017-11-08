@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        buildConfigField 'String','END_POINT','"https://restcountries.eu/rest/v2/"'
+        buildConfigField 'String', 'END_POINT', '"https://restcountries.eu/rest/v2/"'
         applicationId "com.arasu.vt.allcountries"
         minSdkVersion 21
         targetSdkVersion 26
@@ -52,5 +52,7 @@ dependencies {
     compile 'org.androidannotations:androidannotations-api:4.0.0'
     annotationProcessor "org.androidannotations:androidannotations:4.0.0"
 
+    //svg compiler
+    compile 'com.pixplicity.sharp:library:1.1.0'
 
 }
